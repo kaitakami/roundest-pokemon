@@ -15,7 +15,6 @@ const Home: NextPage = () => {
   const secondPokemon = api.pokemon["get-pokemon-by-id"].useQuery({ id: second })
 
   if (firstPokemon.isLoading || secondPokemon.isLoading) return null
-  if (!firstPokemon.data?.sprites.front_default || !secondPokemon.data?.sprites.front_default) return null
 
 
   const voteForRoundest = (selected: number) => {
