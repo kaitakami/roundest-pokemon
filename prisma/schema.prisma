@@ -3,13 +3,25 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider          = "postgresql"
+    url               = env("DATABASE_URL")
     shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Vote {
+    id             String   @id @default(uuid())
+    createdAt      DateTime @default(now())
+    votedFor       Pokemon  @relation(name: "votesFor", fields: [votedForId], references: [id])
+    votedForId     String
+    votedAgainst   Pokemon  @relation(name: "votesAgainst", fields: [votedAgainstId], references: [id])
+    votedAgainstId String
+}
+
+model Pokemon {
+    id String @id
+
+    name        String
+    spriteUrl   String
+    VoteAgainst Vote[] @relation("votesFor")
+    voteFor     Vote[] @relation("votesAgainst")
 }
