@@ -44,7 +44,7 @@ const Home: NextPage = () => {
       <div className="h-screen w-screen flex flex-col justify-center items-center">
         <div className="text-2xl text-center font-bold">Which pokemon is Rounder?</div>
         <div className="p-2" />
-        <div className="rounded p-8 flex justify-between max-w-2xl items-center">
+        <div className="md:flex-row flex-col rounded p-8 flex justify-between max-w-2xl items-center">
           {!firstPokemon.isLoading && firstPokemon.data && !secondPokemon.isLoading && secondPokemon.data && (<>
             <PokemonListing pokemon={firstPokemon.data} vote={() => voteForRoundest(first)} />
             <div className="p-8">VS</div>
